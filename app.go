@@ -16,6 +16,12 @@ func Start(ctx context.Context, rx <-chan *spotify.FullTrack, tx chan<- *Event) 
 	app := tview.NewApplication()
 	pages := tview.NewPages()
 
+	//TODO: help := tview.NewTextView().SetScrollable(false).ScrollToEnd()
+	//fmt.Fprint(help, `help
+	//text
+	//here`)
+	//pages.AddPage("help", help, true, false)
+
 	logs := tview.NewTextView().SetDynamicColors(true).SetScrollable(false).ScrollToEnd()
 	log.SetOutput(tview.ANSIWriter(logs))
 	pages.AddPage("logs", logs, true, true)
@@ -98,7 +104,7 @@ func Start(ctx context.Context, rx <-chan *spotify.FullTrack, tx chan<- *Event) 
 
 		// End user pressed `F3` anywhere.
 		case tcell.KeyF3:
-			// show help
+			// TODO: show help
 
 		case tcell.KeyRune:
 
@@ -106,7 +112,7 @@ func Start(ctx context.Context, rx <-chan *spotify.FullTrack, tx chan<- *Event) 
 
 			// End user pressed `?` anywhere.
 			case '?':
-				// show help
+				// TODO: show help
 
 			// End user pressed `q` anywhere.
 			case 'q':
