@@ -10,9 +10,17 @@ func main() {
 	ctx := ConfiguredContext()
 	ctx, cancel := context.WithCancel(ctx)
 
+	// TODO: Display version mode.
+	// version, ok := ctx.Value("version").(string)
+	// if ok && (version != "") {
+	// 	fmt.Println("nspotify %s", version)
+	// 	cancel()
+	// 	return
+	// }
+
 	// Authenticate with Spotify.
 	cli := Authenticate(ctx)
-	//TODO: incorporate rate limiting? "set the AutoRetry field on the Client struct to true"
+	// TODO: incorporate rate limiting? "set the AutoRetry field on the Client struct to true"
 
 	// List devices mode.
 	sdev, ok := ctx.Value("device").(string)

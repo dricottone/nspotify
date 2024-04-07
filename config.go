@@ -7,41 +7,54 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-// Number of tracks to fetch into a buffer.
-const fetchingBuffer = 100
+// Compile-time configurations.
+const (
+	// Number of tracks to fetch into a buffer.
+	fetchingBuffer = 100
 
-// Number of seconds to wait before rechecking the lazy fetcher.
-const fetchingTimeout = 3
+	// Number of seconds to wait before rechecking the lazy fetcher.
+	fetchingTimeout = 3
 
-// Number of tracks to eagerly load.
-const loadEager = 50
+	// Number of tracks to eagerly load.
+	loadEager = 50
 
-// Number of tracks to lazily load ahead of the cursor.
-const loadLookahead = 50
+	// Number of tracks to lazily load ahead of the cursor.
+	loadLookahead = 50
 
-// Number of seconds to wait before rechecking how many trackers are loaded
-// ahead of the cursor.
-const loadTimeout = 3
+	// Number of seconds to wait before rechecking how many trackers are loaded
+	// ahead of the cursor.
+	loadTimeout = 3
+)
 
-// Command line options.
+// TODO: Compile-time variables.
+// These should be set by the linker.
+// e.g. `go build -ldflags="-X 'main.VERSION=0.1.2'"`
+// var (
+// 	VERSION = ""
+// )
+
+// Run-time configurations.
 var (
 	verbose = flag.Bool("verbose", false, "Show debugging messages (same as '-log-level=trace')")
 	quiet = flag.Bool("quiet", false, "Suppress messages (same as '-log-level=panic')")
 	log_level = flag.String("log-level", "", "Set logging level to `[trace|debug|info|warning|error|fatal|panic]`")
-	//TODO: log_file = flag.String("log-file", "", "Log to `file`")
+	// TODO: log_file = flag.String("log-file", "", "Log to `file`")
 	color = flag.Bool("color", true, "Display in color")
 	port = flag.Int("port", 8080, "Spotify authenticator port")
 	cache = flag.String("cache", "", "Cache `directory`")
 	no_cache = flag.Bool("no-cache", false, "Do not use cached authentication, do not cache authentication")
 	device = flag.String("device", "", "Spotify device `ID`")
 	list_devices = flag.Bool("list-devices", false, "List available Spotify devices and exit")
+	// TODO: version = flag.Bool("version", false, "List version and exit")
 )
 
+// Create a pointer to a value, especially a string.
 // Credit to `https://stackoverflow.com/a/30716481`:
 func Pointer[T any](v T) *T {
 	return &v
 }
 
+// Create a context with configurations applied.
 func ConfiguredContext() context.Context {
 	ctx := context.Background()
 
@@ -99,6 +112,9 @@ func ConfiguredContext() context.Context {
 		device = Pointer("")
 	}
 	ctx = context.WithValue(ctx, "device", *device)
+
+	// TODO: Signal `-version` by setting the version variable.
+	// ctx = context.WithValue(ctx, "version", VERSION)
 
 	return ctx
 }

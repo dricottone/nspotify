@@ -10,6 +10,7 @@ GO_SRC!=find * -type f -name '*.go'
 GO_LDFLAGS:=
 GO_LDFLAGS+=-X main.CLIENTID=$(file < clientid.txt)
 GO_LDFLAGS+=-X main.CLIENTSECRET=$(file < clientsecret.txt)
+# TODO: GO_LDFLAGS+=-X main.VERSION=0.0.1
 
 nspotify: go.mod $(GO_SRC)
 	go build -ldflags "$(GO_LDFLAGS)" .
