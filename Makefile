@@ -1,5 +1,5 @@
 go.mod:
-	go mod init git.dominic-ricottone.com/~dricottone/nspotify
+	go mod init git.sr.ht/~dricottone/nspotify
 	go get github.com/zmb3/spotify/v2
 	go get github.com/sirupsen/logrus
 	go get golang.org/x/oauth2
@@ -18,6 +18,6 @@ nspotify: go.mod $(GO_SRC)
 build: nspotify
 
 clean:
-	rm -f go.mod nspotify
+	rm -f go.mod go.sum nspotify
 
 .PHONY: run build clean

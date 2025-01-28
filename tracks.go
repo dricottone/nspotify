@@ -43,7 +43,7 @@ func IntoCells(track *spotify.FullTrack) []*tview.TableCell {
 	name := tview.NewTableCell(track.Name).SetTextColor(tcell.ColorWhite).SetReference(track.URI)
 	artist := tview.NewTableCell(FormatArtists(track.Artists)).SetTextColor(tcell.ColorWhite)
 	album := tview.NewTableCell(track.Album.Name).SetTextColor(tcell.ColorWhite)
-	duration := tview.NewTableCell(FormatDuration(track.Duration)).SetAlign(tview.AlignRight).SetTextColor(tcell.ColorWhite)
+	duration := tview.NewTableCell(FormatDuration(int(track.Duration))).SetAlign(tview.AlignRight).SetTextColor(tcell.ColorWhite)
 
 	//id := track.ID
 	//number := track.TrackNumber
